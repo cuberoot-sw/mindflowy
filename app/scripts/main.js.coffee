@@ -1,5 +1,4 @@
 class Mind
-  rootRef = new Firebase("https://mindblowwy.firebaseio.com");
   # add new records at the appropriate level when a button is clicked
   # alt/option key is down
   displayTitleMessage = (id, title, parentId) ->
@@ -25,10 +24,10 @@ class Mind
     id = $rec.attr("data-id") or null
     if id
       $rec.find("[data-id]").each ->
-        rootRef.child($(this).attr("data-id")).remove()
+        FB.remove($(this).attr("data-id"))
         return
 
-      rootRef.child(id).remove()
+      FB.remove(id)
     false
 
   jQuery("body").on "click", "button", ->
@@ -37,7 +36,7 @@ class Mind
     parent = $input.closest("[data-id]").attr("data-id") or null
     console.log "creating", parent, title
     if title
-      rootRef.push
+      FB.push
         title: title
         parent: parent
 
@@ -52,13 +51,12 @@ class Mind
       console.log key.which
     return
 
-  rootRef.on "child_added", (snapshot) ->
-    message = snapshot.val()
-    console.log "child_added", message
-    displayTitleMessage snapshot.name(), message.title, message.parent
+  FB.child_added (id, data)->
+    console.log "child_added", id
+    displayTitleMessage id, data.title, data.parent
     return
 
-  rootRef.on "child_removed", (snapshot) ->
-    $("#records").find("[data-id=\"" + snapshot.name() + "\"]").remove()
-    return
+  FB.child_removed (id, data) ->
+    console.log "child_removed", id, "----", data.title
+    $("#records").find("[data-id=\"" + id + "\"]").remove()
 
