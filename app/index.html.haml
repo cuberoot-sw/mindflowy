@@ -74,7 +74,7 @@
             %input{:type => "text"}/
             %button add
           %li#recordTemplate
-            %span
+            %span.editable(contenteditable="true")
             %a.delete{:href => "#"} X
             %ul
             %form
@@ -95,6 +95,7 @@
     / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
     %script{:src => "scripts/FB.js"}
+    %script{:src => "scripts/lib/jquery.editable-1.0.1.js"}
     %script{:src => "scripts/main.js"}
     / endbuild
 

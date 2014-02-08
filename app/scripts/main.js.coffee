@@ -43,20 +43,25 @@ class Mind
     $input.val ""
     false
 
-  jQuery("body").on "keydown", ".node", (key) ->
+
+  jQuery("body").on "blur", ".editable", () ->
+    console.log "blur "
+
+  jQuery("body").on "keydown", ".editable", (key) ->
     if key.shiftKey
       console.log "shift " + key.which
-      false
     else
       console.log key.which
-    return
 
   FB.child_added (id, data)->
     console.log "child_added", id
     displayTitleMessage id, data.title, data.parent
+    #jQuery(".editable").wysiwygEvt()
+    #jQuery(".editable").addClass("blue")
     return
 
   FB.child_removed (id, data) ->
     console.log "child_removed", id, "----", data.title
     $("#records").find("[data-id=\"" + id + "\"]").remove()
+
 
