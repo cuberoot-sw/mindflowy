@@ -2,10 +2,13 @@ class @FB
 
   constructor: (@name) ->
 
-  rootRef = new Firebase("https://mindblowwy.firebaseio.com");
+  rootRef = new Firebase("https://mindblowwy.firebaseio.com/nodes");
 
   @remove = (id) ->
     rootRef.child(id).remove()
+
+  @update = (id, hash) ->
+    rootRef.child(id).update(hash)
 
   @push = (hash) ->
     rootRef.push(hash)
