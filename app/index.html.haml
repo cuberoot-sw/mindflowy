@@ -69,13 +69,17 @@
     .container
       .jumbotron
         %h1 Yo!!
-        %ul
-          %li HTML5 Boilerplate
-          %li Bootstrap
-          %li
-            Font Awesome
-            %i.fa.fa-flag
-            %i.fa.fa-comment
+        %ul#records
+          %form
+            %input{:type => "text"}/
+            %button add
+          %li#recordTemplate
+            %span
+            %a.delete{:href => "#"} X
+            %ul
+            %form
+              %input.node{:type => "text"}/
+              %button add
 
     / Google Analytics: change UA-XXXXX-X to be your site's ID.
     :javascript
