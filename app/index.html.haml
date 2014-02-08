@@ -1,0 +1,61 @@
+<!doctype html>
+/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+/[if IE 7] <html class="no-js lt-ie9 lt-ie8">
+/[if IE 8] <html class="no-js lt-ie9">
+/ [if gt IE 8]><!
+%html.no-js
+  / <![endif]
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Place favicon.ico and apple-touch-icon.png in the root directory
+    %link{:href => "styles/main.css", :rel => "stylesheet"}/
+    / build:js scripts/vendor/modernizr.js
+    %script{:src => "bower_components/modernizr/modernizr.js"}
+    / endbuild
+  %body
+    .container
+      .jumbotron
+        %h1 'Allo, 'Allo! Allo!!!
+        %p You now have
+        %ul
+          %li HTML5 Boilerplate
+          %li Bootstrap
+          %li
+            Font Awesome
+            %i.fa.fa-flag
+            %i.fa.fa-comment
+        %p installed.
+        %h3 Enjoy coding! - Yeoman
+    /[if lt IE 7]
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    / Google Analytics: change UA-XXXXX-X to be your site's ID.
+    :javascript
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+        / build:js scripts/main.js
+    %script{:src => "bower_components/jquery/jquery.js"}
+    %script{:src => "scripts/main.js"}
+    %script{:src => "scripts/hello.js"}
+    / endbuild
+    / build:js scripts/vendor/bootstrap.js
+    %script{:src => "bower_components/bootstrap/js/affix.js"}
+    %script{:src => "bower_components/bootstrap/js/alert.js"}
+    %script{:src => "bower_components/bootstrap/js/dropdown.js"}
+    %script{:src => "bower_components/bootstrap/js/tooltip.js"}
+    %script{:src => "bower_components/bootstrap/js/modal.js"}
+    %script{:src => "bower_components/bootstrap/js/transition.js"}
+    %script{:src => "bower_components/bootstrap/js/button.js"}
+    %script{:src => "bower_components/bootstrap/js/popover.js"}
+    %script{:src => "bower_components/bootstrap/js/carousel.js"}
+    %script{:src => "bower_components/bootstrap/js/scrollspy.js"}
+    %script{:src => "bower_components/bootstrap/js/collapse.js"}
+    %script{:src => "bower_components/bootstrap/js/tab.js"}
+    / endbuild

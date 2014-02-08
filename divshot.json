@@ -1,0 +1,9 @@
+{
+  "name": "mindflowy",
+  "root": "./dist",
+  "clean_urls": true,
+  "error_page": "/error.html",
+  "cache_control": {},
+  "routes": {},
+  "exclude": ["*.haml", "*.coffee"]
+}
