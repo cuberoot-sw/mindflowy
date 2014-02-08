@@ -2,7 +2,7 @@
   "name": "testtest",
   "version": "0.0.0",
   "dependencies": {
-    "bootstrap": "~3.0.0",
+    "bootstrap": "3.0.2",
     "font-awesome": "~4.0.0",
     "modernizr": "~2.6.2",
     "jquery": "~1.9.1"

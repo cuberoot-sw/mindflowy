@@ -1,26 +1,72 @@
-<!doctype html>
-/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7">
-/[if IE 7] <html class="no-js lt-ie9 lt-ie8">
-/[if IE 8] <html class="no-js lt-ie9">
-/ [if gt IE 8]><!
-%html.no-js
-  / <![endif]
+!!!
+%html
   %head
-    %meta{:charset => "utf-8"}/
-    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
-    %title
-    %meta{:content => "", :name => "description"}/
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %title MindFlowy
+    %meta{:content => "Your description", :name => "description"}/
+    %meta{:content => "Your,Keywords", :name => "keywords"}/
+    %meta{:content => "ResponsiveWebInc", :name => "author"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    / Place favicon.ico and apple-touch-icon.png in the root directory
+    %link(type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600")
+    %link(type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700")
     %link{:href => "styles/main.css", :rel => "stylesheet"}/
-    / build:js scripts/vendor/modernizr.js
     %script{:src => "bower_components/modernizr/modernizr.js"}
-    / endbuild
+    / Favicon
+    %link{:href => "#", :rel => "shortcut icon"}/
   %body
+    / Header  Starts
+    #undefined-sticky-wrapper.sticky-wrapper{:style => "height: 90px;"}
+      %header{:style => ""}
+        / Container
+        .container
+          .row
+            .col-md-4.col-sm-4
+              / Logo
+              .logo
+                %h1
+                  %a{:href => "#"}
+                    %i.fa.fa-sitemap
+                    MindFlowy
+            .col-md-8.col-sm-8
+              / Navigation
+              .navi
+                / Menu
+                #ddtopmenubar.mattblackmenu
+                  / UnorderedList
+                  %ul
+                    / List
+                    %li
+                      %a{:href => "#.banner-container"} Home
+                    %li
+                      %a{:href => "#", :rel => "ddsubmenustyle"}
+                        Pages
+                        %span.caret
+                          %img.downarrowpointer{:src => "Chandler_files/arrow-down.gif", :style => "width: 11px; height: 7px;"}/
+                      / Dropdown Submenu Style
+                    %li
+                      %a{:href => "#.service"} Service
+                    %li
+                      %a{:href => "#.about-us"} About
+                    %li
+                      %a{:href => "#.contact-us"} Contact
+            / Dropdown NavBar
+            .navis
+              %select
+                %option{:selected => "selected", :value => ""} Menu
+                %option{:value => "#.banner-container"} Home
+                %option{:value => "#"} Pages
+                %option{:value => "#.features"} Features
+                %option{:value => "#.portfolio"} Portfolio
+                %option{:value => "#.product"} Product
+                %option{:value => "#.testimonials"} Testimonials
+                %option{:value => "#.pricing"} Pricing
+                %option{:value => "#.service"} Service
+                %option{:value => "#.about-us"} About
+                %option{:value => "#.contact-us"} Contact
+
     .container
       .jumbotron
-        %h1 'Allo, 'Allo! Allo!!!
-        %p You now have
+        %h1 Yo!!
         %ul
           %li HTML5 Boilerplate
           %li Bootstrap
@@ -28,10 +74,7 @@
             Font Awesome
             %i.fa.fa-flag
             %i.fa.fa-comment
-        %p installed.
-        %h3 Enjoy coding! - Yeoman
-    /[if lt IE 7]
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+
     / Google Analytics: change UA-XXXXX-X to be your site's ID.
     :javascript
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -44,18 +87,6 @@
     %script{:src => "bower_components/jquery/jquery.js"}
     %script{:src => "scripts/main.js"}
     %script{:src => "scripts/hello.js"}
-    / endbuild
-    / build:js scripts/vendor/bootstrap.js
-    %script{:src => "bower_components/bootstrap/js/affix.js"}
-    %script{:src => "bower_components/bootstrap/js/alert.js"}
-    %script{:src => "bower_components/bootstrap/js/dropdown.js"}
-    %script{:src => "bower_components/bootstrap/js/tooltip.js"}
-    %script{:src => "bower_components/bootstrap/js/modal.js"}
-    %script{:src => "bower_components/bootstrap/js/transition.js"}
-    %script{:src => "bower_components/bootstrap/js/button.js"}
-    %script{:src => "bower_components/bootstrap/js/popover.js"}
-    %script{:src => "bower_components/bootstrap/js/carousel.js"}
-    %script{:src => "bower_components/bootstrap/js/scrollspy.js"}
-    %script{:src => "bower_components/bootstrap/js/collapse.js"}
-    %script{:src => "bower_components/bootstrap/js/tab.js"}
-    / endbuild
+
+
+

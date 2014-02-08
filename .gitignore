@@ -25,3 +25,7 @@ node_modules
 dist
 .tmp
 app/bower_components
+*.html
+./app/scripts/*.js
+./app/scripts/main.css
+./app/scripts/main.css.map

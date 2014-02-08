@@ -152,6 +152,17 @@ module.exports = function (grunt) {
         }
       }
     },
+    //concat: {
+      //partials: {
+        //options: {
+          //process: true
+          //files: {
+            //# destination as key, sources as value
+            //"/index.html": ["partials/_header.html", "partials/_home-page.html", "partials/_footer.html"]
+          //}
+        //}
+      //}
+    //}
     // not used since Uglify task does concat,
     // but still available if needed
     /*concat: {
