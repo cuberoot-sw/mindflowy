@@ -10,7 +10,9 @@
     %link(type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600")
     %link(type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700")
     %link{:href => "styles/main.css", :rel => "stylesheet"}/
+    / build:js scripts/vendor/modernizr.js
     %script{:src => "bower_components/modernizr/modernizr.js"}
+    / endbuild
     / Favicon
     %link{:href => "#", :rel => "shortcut icon"}/
   %body
@@ -41,14 +43,14 @@
                       %a{:href => "#", :rel => "ddsubmenustyle"}
                         Pages
                         %span.caret
-                          %img.downarrowpointer{:src => "Chandler_files/arrow-down.gif", :style => "width: 11px; height: 7px;"}/
+                          %img.downarrowpointer{:src => "images/arrow-down.gif", :style => "width: 11px; height: 7px;"}/
                       / Dropdown Submenu Style
                     %li
                       %a{:href => "#.service"} Service
                     %li
                       %a{:href => "#.about-us"} About
                     %li
-                      %a{:href => "#.contact-us"} Contact
+                      %a{:href => "#.contact-us"} Account
             / Dropdown NavBar
             .navis
               %select
@@ -83,10 +85,12 @@
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
-        / build:js scripts/main.js
+
+    %script(src="http://static.firebase.com/v0/firebase.js")
+    %script(src="https://cdn.firebase.com/v0/firebase-simple-login.js")
+    / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
     %script{:src => "scripts/main.js"}
-    %script{:src => "scripts/hello.js"}
-
+    / endbuild
 
 
