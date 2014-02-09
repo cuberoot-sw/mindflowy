@@ -27,7 +27,7 @@
               / Logo
               .logo
                 %h1
-                  %a{:href => "#"}
+                  %a{:href => "/"}
                     %i.fa.fa-sitemap
                     MindFlowy
             .col-md-8.col-sm-8
@@ -51,6 +51,11 @@
                         Keyboard Shortcuts
 
     .container
+      .row
+        .col-md-8.col-sm-8
+          %h1 Collaborative clone of Workflowy!
+          %p
+            Your Digital Brain. Take control by visualizing all your open loops, tasks, and ideas in your Brain.
       .row.service
         %ul#records
           %li#recordTemplate
@@ -63,26 +68,26 @@
             .modal-content
               .modal-header
                 %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-                %h4#myModalLabel.modal-title Keyboard Shortcuts Guide
+                %h3#myModalLabel.modal-title Keyboard Shortcuts Guide
               .modal-body
                 %dl
                   %dt
-                    %em.blue Select
+                    %strong.red Select
                     a node and start typing
                   %dt
-                    %em.blue Enter
+                    %strong.red Enter
                     to add a new node
                   %dt
-                    %em.blue Tab
+                    %strong.red Tab
                     to indent
                   %dt
-                    %em.blue Shift+Tab
+                    %strong.red Shift+Tab
                     to un-indent
                   %dt
-                    %em.blue Up Arrow
+                    %strong.red Up Arrow
                     go to previous node
                   %dt
-                    %em.blue Down Arrow
+                    %strong.red Down Arrow
                     go to next node
 
               .modal-footer

@@ -50,7 +50,6 @@ class Mind
     FB.update nodeId,
       title: title
       parent: newParentId
-    $newParent.children("ul").append($(this).parent())
 
   jQuery("body").on 'keydown.up', 'span.editable', (e) ->
     e.stopPropagation()
