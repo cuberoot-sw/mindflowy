@@ -43,8 +43,22 @@ class Mind
     e.preventDefault()
 
   jQuery("body").on 'blur', 'span.editable', (e) ->
-    console.log 'blur', e.which, $(this).html()
     e.preventDefault()
+    $this = $(this)
+    htmlold = $this.parent("li").find('.origText').val()
+    htmlnew = $this.html()
+
+    if htmlold isnt htmlnew
+      console.log htmlold, htmlnew
+      if htmlold is null or htmlold is ""
+        $this.trigger "change", ["newNode"]
+      else if htmlnew is null or htmlnew is ""
+        $this.trigger "delete", ["emptyNode"]
+      else
+        $this.trigger "change", ["editedNode"]
+
+      htmlold = htmlnew
+
 
 
   jQuery("body").on "click", "a.delete", ->
@@ -58,18 +72,8 @@ class Mind
       FB.remove(id)
     false
 
-  jQuery("body").on "blur", ".editable", () ->
-    #console.log "blur "
-    #title = $(this).html()
-    #parent = $(this).closest("[data-id]").attr("data-id") or null
-    #console.log "blur creating", parent, title
-    #if title
-      #FB.push
-        #title: title
-        #parent: parent
-
   jQuery("body").on "change", ".editable", (event, type) ->
-    title = $(this).find("span.editable").html()
+    title = $(this).html()
     $node = $(this).closest("[data-id]")
     nodeId = $node.attr("data-id") or null
     parentId = $node.attr("data-parent-id") or null
@@ -108,7 +112,9 @@ class Mind
     # enter the <span> tag and use .text() to escape title
     # navigate back to the cloned element and return it
     $el = $("#recordTemplate").clone().attr("id", null).find("span.editable").text(title).end()
+    $el.next(".origText").val(title)
     #$el.find("span.editable").wysiwygEvt()
     $el.prepend("<span class='nodeId'>#"+id+"</span>")
+    $el.append("<input type='hidden' class='origText' value='"+title+"'/>")
     $el
 
