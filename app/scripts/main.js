@@ -57,11 +57,10 @@ Mind = (function() {
     }
     nodeId = $(this).parent().attr("data-id");
     title = $(this).html();
-    FB.update(nodeId, {
+    return FB.update(nodeId, {
       title: title,
       parent: newParentId
     });
-    return $newParent.children("ul").append($(this).parent());
   });
 
   jQuery("body").on('keydown.up', 'span.editable', function(e) {
