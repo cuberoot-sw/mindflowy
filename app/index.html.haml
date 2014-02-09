@@ -6,6 +6,7 @@
     %meta{:content => "Your description", :name => "description"}/
     %meta{:content => "Your,Keywords", :name => "keywords"}/
     %meta{:content => "ResponsiveWebInc", :name => "author"}/
+    %meta(name="google-site-verification" content="Pq_I5K_rMBuSJdMKgtwi6iMvrI7I8eGjpn-XCYhdWfQ")
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %link(type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600")
     %link(type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700")
@@ -77,19 +78,20 @@
  
     / Google Analytics: change UA-XXXXX-X to be your site's ID.
     :javascript
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+      ga('create', 'UA-37861942-2', 'divshot.io');
+      ga('send', 'pageview');
     %script(src="http://static.firebase.com/v0/firebase.js")
     %script(src="https://cdn.firebase.com/v0/firebase-simple-login.js")
     / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
     %script{:src => "scripts/FB.js"}
     %script{:src => "scripts/wysiwygEvt.js"}
+    %script{:src => "scripts/jquery.hotkeys.js"}
     %script{:src => "scripts/main.js"}
     / endbuild
 

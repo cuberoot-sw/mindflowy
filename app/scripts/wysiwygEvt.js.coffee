@@ -2,7 +2,7 @@
   $.fn.wysiwygEvt = ->
     $this = $(this)
     htmlold = $this.html()
-    $this.bind "blur keydown", (e) ->
+    $this.bind "blur keyup", (e) ->
       specialKey = switch e.which
         when 38 then "up"
         when 40 then "down"
@@ -11,7 +11,7 @@
           else "tab"
         else null
 
-      if specialKey or e.type is "blur"
+      if specialKey or (e and e.type is "blur")
         console.log "wysiwygEvt: ", e.which
         $this.trigger specialKey, [e]
         e.preventDefault()
