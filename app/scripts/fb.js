@@ -33,6 +33,18 @@ this.FB = (function() {
     });
   };
 
+  FB.child_changed = function(cb) {
+    return rootRef.on("child_changed", function(snapshot) {
+      return cb(snapshot.name(), snapshot.val());
+    });
+  };
+
   return FB;
 
 })();
+
+jQuery("body").on("hover", ".editable", (function() {
+  return $(this).next("a").show();
+}), function() {
+  return $(this).next("a").hide();
+});

@@ -22,3 +22,12 @@ class @FB
     rootRef.on "child_removed", (snapshot) ->
       cb(snapshot.name(), snapshot.val())
 
+  @child_changed = (cb) ->
+    rootRef.on "child_changed", (snapshot) ->
+      cb(snapshot.name(), snapshot.val())
+
+jQuery("body").on "hover",".editable", (->
+  $(this).next("a").show()
+), ->
+  $(this).next("a").hide()
+
