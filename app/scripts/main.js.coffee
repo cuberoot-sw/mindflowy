@@ -1,4 +1,5 @@
 class Mind
+  @NEW_NODE_ADDED: false
   # add new records at the appropriate level when a button is clicked
   # alt/option key is down
   displayTitleMessage = (id, title, parentId) ->
@@ -8,7 +9,9 @@ class Mind
 
     # add a data-parent attribute, which we use to locate parent elements
     $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId)
-    $el.find("span.editable").focus()
+    if Mind.NEW_NODE_ADDED
+      $el.find("span.editable").focus()
+      Mind.NEW_NODE_ADDED = false
 
   jQuery("body").on 'keydown.tab', 'span.editable', (e) ->
     console.log 'keydown.tab', e.which
@@ -32,9 +35,10 @@ class Mind
     nodeId = $node.attr("data-id") or null
     parentId = $node.attr("data-parent-id") or null
     if parentId is null
-      title = "Add here..."
+      title = " "
     else
       title = null
+    Mind.NEW_NODE_ADDED = true
     FB.push
       title: title
       parent: parentId
@@ -77,10 +81,11 @@ class Mind
     parentId = $node.attr("data-parent-id") or null
     console.log "in change", type, "nodeId: ", nodeId, " parentId: ", parentId, title
     switch type
-      when "newNode"
-        FB.push
-          title: title
-          parent: parentId
+      #when "newNode"
+        #Mind.NEW_NODE_ADDED = true
+        #FB.push
+          #title: title
+          #parent: parentId
       when "editedNode"
         FB.update nodeId,
           title: title
