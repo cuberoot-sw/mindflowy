@@ -19,7 +19,7 @@ Mind = (function() {
     }
   };
 
-  jQuery("body").on('keydown.tab', 'span.editable', function(e) {
+  jQuery(document).on('keydown.tab', 'span.editable', function(e) {
     var $prev, newParentId, nodeId, title;
     e.preventDefault();
     e.stopPropagation();

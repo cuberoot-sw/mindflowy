@@ -13,7 +13,7 @@ class Mind
       $el.find("span.editable").focus()
       Mind.NEW_NODE_ADDED = false
 
-  jQuery("body").on 'keydown.tab', 'span.editable', (e) ->
+  jQuery(document).on 'keydown.tab', 'span.editable', (e) ->
     e.preventDefault()
     e.stopPropagation()
     console.log 'keydown.tab', e.which
