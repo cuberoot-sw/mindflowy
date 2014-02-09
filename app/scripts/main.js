@@ -1,7 +1,7 @@
 var Mind;
 
 Mind = (function() {
-  var displayTitleMessage, findParent, makeListItem;
+  var change_child, displayTitleMessage, findParent, makeListItem;
 
   function Mind() {}
 
@@ -22,6 +22,7 @@ Mind = (function() {
   jQuery("body").on('keydown.tab', 'span.editable', function(e) {
     var $prev, newParentId, nodeId, title;
     e.preventDefault();
+    e.stopPropagation();
     console.log('keydown.tab', e.which);
     $prev = $(this).parent().prev();
     if ($prev.length === 0) {
@@ -42,6 +43,7 @@ Mind = (function() {
     var $newParent, $parents, newParentId, nodeId, title;
     console.log('keydown.Shift_tab', e.which);
     e.preventDefault();
+    e.stopPropagation();
     $parents = $(this).parentsUntil("#records", "li");
     if ($parents.length <= 1) {
       return;
@@ -55,10 +57,11 @@ Mind = (function() {
     }
     nodeId = $(this).parent().attr("data-id");
     title = $(this).html();
-    return FB.update(nodeId, {
+    FB.update(nodeId, {
       title: title,
       parent: newParentId
     });
+    return $newParent.children("ul").append($(this).parent());
   });
 
   jQuery("body").on('keydown.up', 'span.editable', function(e) {
@@ -156,14 +159,34 @@ Mind = (function() {
     return $("#records").find("[data-id=\"" + id + "\"]").remove();
   });
 
+  FB.child_changed(function(id, data) {
+    var $child, $parent;
+    console.log("child_changed", id, "----", data.title, data.parent);
+    $parent = $("[data-id='" + data.parent + "']");
+    $child = $("[data-id='" + id + "']");
+    if ($parent.has("[data-id='" + id + "']").length > 0) {
+      console.log("child exists");
+      return $child.find("span.editable").html(data.title);
+    } else {
+      return console.log("appending child");
+    }
+  });
+
   findParent = function(parentId) {
     return $("#records").find("[data-id=\"" + parentId + "\"] > ul");
+  };
+
+  change_child = function(id, data) {
+    if (data.parent === null) {
+      return $("[data-id='" + id + "']").detach().appendTo("#records");
+    } else {
+      return $("[data-id='" + id + "']").detach().appendTo("[data-id='" + data.parent + "']");
+    }
   };
 
   makeListItem = function(title, id, parentId) {
     var $el;
     $el = $("#recordTemplate").clone().attr("id", null).find("span.editable").text(title).end();
-    $el.prepend("<span class='nodeId'>#" + id + "</span>");
     return $el.prepend("<input type='hidden' class='origText' value='" + title + "'/>");
   };
 

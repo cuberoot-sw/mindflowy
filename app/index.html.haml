@@ -55,12 +55,12 @@
                       %a{:href => "#.contact-us"} Account
 
     .container
-      .jumbotron
-        %h3 Yo!!
+      .row.service
         %ul#records
           %li#recordTemplate
             %span.editable(contenteditable="true")
-            %a.delete{:href => "#"} X
+            %a.delete{:href => "#"}
+              %i.fa.fa-times
             %ul
         #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
           .modal-dialog

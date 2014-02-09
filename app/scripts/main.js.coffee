@@ -15,6 +15,7 @@ class Mind
 
   jQuery("body").on 'keydown.tab', 'span.editable', (e) ->
     e.preventDefault()
+    e.stopPropagation()
     console.log 'keydown.tab', e.which
     $prev = $(this).parent().prev()
     if $prev.length == 0
@@ -33,6 +34,7 @@ class Mind
   jQuery("body").on 'keydown.Shift_tab', 'span.editable', (e) ->
     console.log 'keydown.Shift_tab', e.which
     e.preventDefault()
+    e.stopPropagation()
     $parents = $(this).parentsUntil("#records", "li")
 
     return if $parents.length <= 1
@@ -48,7 +50,7 @@ class Mind
     FB.update nodeId,
       title: title
       parent: newParentId
-    #$newParent.children("ul").append($(this).parent())
+    $newParent.children("ul").append($(this).parent())
 
   jQuery("body").on 'keydown.up', 'span.editable', (e) ->
     e.stopPropagation()
@@ -142,10 +144,26 @@ class Mind
     console.log "child_removed", id, "----", data.title
     $("#records").find("[data-id=\"" + id + "\"]").remove()
 
+  FB.child_changed (id, data) ->
+    console.log "child_changed", id, "----", data.title, data.parent
+    $parent = $("[data-id='"+data.parent+"']")
+    $child = $("[data-id='"+id+"']")
+    if $parent.has("[data-id='"+id+"']").length > 0
+      console.log "child exists"
+      $child.find("span.editable").html(data.title)
+    else
+      console.log "appending child"
+      #change_child id, data
 
   # Helpers
   findParent = (parentId) ->
     $("#records").find "[data-id=\"" + parentId + "\"] > ul"
+
+  change_child = (id, data) ->
+    if data.parent is null
+      $("[data-id='"+id+"']").detach().appendTo("#records")
+    else
+      $("[data-id='"+id+"']").detach().appendTo("[data-id='"+data.parent+"']")
 
   makeListItem = (title, id, parentId) ->
     # remove the id attr
@@ -153,6 +171,6 @@ class Mind
     # navigate back to the cloned element and return it
     $el = $("#recordTemplate").clone().attr("id", null).find("span.editable").text(title).end()
     #$el.find("span.editable").wysiwygEvt()
-    $el.prepend("<span class='nodeId'>#"+id+"</span>")
+    #$el.prepend("<span class='nodeId'>#"+id+"</span>")
     $el.prepend("<input type='hidden' class='origText' value='"+title+"'/>")
 
