@@ -47,35 +47,50 @@
                           %img.downarrowpointer{:src => "images/arrow-down.gif", :style => "width: 11px; height: 7px;"}/
                       / Dropdown Submenu Style
                     %li
-                      %a{:href => "#.service"} Service
+                      %a#help{:href => "#.help"} Help
                     %li
-                      %a{:href => "#.about-us"} About
+                      %button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal"}
+                        Keyboard Shortcuts
                     %li
                       %a{:href => "#.contact-us"} Account
-            / Dropdown NavBar
-            .navis
-              %select
-                %option{:selected => "selected", :value => ""} Menu
-                %option{:value => "#.banner-container"} Home
-                %option{:value => "#"} Pages
-                %option{:value => "#.features"} Features
-                %option{:value => "#.portfolio"} Portfolio
-                %option{:value => "#.product"} Product
-                %option{:value => "#.testimonials"} Testimonials
-                %option{:value => "#.pricing"} Pricing
-                %option{:value => "#.service"} Service
-                %option{:value => "#.about-us"} About
-                %option{:value => "#.contact-us"} Contact
 
     .container
       .jumbotron
-        %h1 Yo!!
+        %h3 Yo!!
         %ul#records
           %li#recordTemplate
             %span.editable(contenteditable="true")
             %a.delete{:href => "#"} X
             %ul
- 
+        #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+          .modal-dialog
+            .modal-content
+              .modal-header
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+                %h4#myModalLabel.modal-title Keyboard Shortcuts Guide
+              .modal-body
+                %dl
+                  %dt
+                    Select a node and start typing
+                  %dt
+                    %em.blue Enter
+                    to add a new node
+                  %dt
+                    %em.blue Tab
+                    to indent
+                  %dt
+                    %em.blue Shift+Tab
+                    to un-indent
+                  %dt
+                    %em.blue Up Arrow
+                    go to previous node
+                  %dt
+                    %em.blue Down Arrow
+                    go to next node
+
+              .modal-footer
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
     / Google Analytics: change UA-XXXXX-X to be your site's ID.
     :javascript
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -89,6 +104,7 @@
     %script(src="https://cdn.firebase.com/v0/firebase-simple-login.js")
     / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
+    %script{:src => "scripts/modal.js"}
     %script{:src => "scripts/FB.js"}
     %script{:src => "scripts/wysiwygEvt.js"}
     %script{:src => "scripts/jquery.hotkeys.js"}
