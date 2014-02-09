@@ -33,6 +33,22 @@ class Mind
   jQuery("body").on 'keydown.Shift_tab', 'span.editable', (e) ->
     console.log 'keydown.Shift_tab', e.which
     e.preventDefault()
+    $parents = $(this).parentsUntil("#records", "li")
+
+    return if $parents.length <= 1
+    if $parents.length == 2
+      newParentId = null
+      $("#records").append($(this).parent())
+    else
+      newParentId = $($parents[2]).attr("data-id")
+      $newParent = $($parents[2]).children("ul").append($(this).parent())
+
+    nodeId = $(this).parent().attr("data-id")
+    title = $(this).html()
+    FB.update nodeId,
+      title: title
+      parent: newParentId
+    #$newParent.children("ul").append($(this).parent())
 
   jQuery("body").on 'keydown.up', 'span.editable', (e) ->
     e.stopPropagation()

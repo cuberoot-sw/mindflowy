@@ -39,8 +39,26 @@ Mind = (function() {
   });
 
   jQuery("body").on('keydown.Shift_tab', 'span.editable', function(e) {
+    var $newParent, $parents, newParentId, nodeId, title;
     console.log('keydown.Shift_tab', e.which);
-    return e.preventDefault();
+    e.preventDefault();
+    $parents = $(this).parentsUntil("#records", "li");
+    if ($parents.length <= 1) {
+      return;
+    }
+    if ($parents.length === 2) {
+      newParentId = null;
+      $("#records").append($(this).parent());
+    } else {
+      newParentId = $($parents[2]).attr("data-id");
+      $newParent = $($parents[2]).children("ul").append($(this).parent());
+    }
+    nodeId = $(this).parent().attr("data-id");
+    title = $(this).html();
+    return FB.update(nodeId, {
+      title: title,
+      parent: newParentId
+    });
   });
 
   jQuery("body").on('keydown.up', 'span.editable', function(e) {
