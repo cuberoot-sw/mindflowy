@@ -14,8 +14,21 @@ class Mind
       Mind.NEW_NODE_ADDED = false
 
   jQuery("body").on 'keydown.tab', 'span.editable', (e) ->
-    console.log 'keydown.tab', e.which
     e.preventDefault()
+    console.log 'keydown.tab', e.which
+    $prev = $(this).parent().prev()
+    if $prev.length == 0
+      #no parent
+      return
+    else
+      newParentId = $prev.attr("data-id")
+      nodeId = $(this).parent().attr("data-id")
+      title = $(this).html()
+      FB.update nodeId,
+        title: title
+        parent: newParentId
+      $prev.children("ul").append($(this).parent())
+
 
   jQuery("body").on 'keydown.Shift_tab', 'span.editable', (e) ->
     console.log 'keydown.Shift_tab', e.which
