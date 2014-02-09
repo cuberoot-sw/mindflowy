@@ -8,6 +8,7 @@ class Mind
 
     # add a data-parent attribute, which we use to locate parent elements
     $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId)
+    $el.find("span.editable").focus()
 
   jQuery("body").on 'keydown.tab', 'span.editable', (e) ->
     console.log 'keydown.tab', e.which
@@ -27,13 +28,17 @@ class Mind
 
   jQuery("body").on 'keydown.return', 'span.editable', (e) ->
     console.log 'keydown.return', e.which
-    e.preventDefault()
     $node = $(this).closest("[data-id]")
     nodeId = $node.attr("data-id") or null
     parentId = $node.attr("data-parent-id") or null
+    if parentId is null
+      title = "Add here..."
+    else
+      title = null
     FB.push
-      title: null
+      title: title
       parent: parentId
+    e.preventDefault()
 
 
   jQuery("body").on 'blur', 'span.editable', (e) ->
@@ -42,17 +47,16 @@ class Mind
     htmlold = $this.parent("li").find('.origText').val()
     htmlnew = $this.html()
 
+    console.log "blur", htmlold, htmlnew
+    $this.parent("li").find('.origText').val(htmlnew)
+
     if htmlold isnt htmlnew
-      console.log htmlold, htmlnew
       if htmlold is null or htmlold is ""
         $this.trigger "change", ["newNode"]
       else if htmlnew is null or htmlnew is ""
         $this.trigger "delete", ["emptyNode"]
       else
         $this.trigger "change", ["editedNode"]
-
-      htmlold = htmlnew
-
 
 
   jQuery("body").on "click", "a.delete", ->
@@ -106,9 +110,7 @@ class Mind
     # enter the <span> tag and use .text() to escape title
     # navigate back to the cloned element and return it
     $el = $("#recordTemplate").clone().attr("id", null).find("span.editable").text(title).end()
-    $el.next(".origText").val(title)
     #$el.find("span.editable").wysiwygEvt()
     $el.prepend("<span class='nodeId'>#"+id+"</span>")
-    $el.append("<input type='hidden' class='origText' value='"+title+"'/>")
-    $el
+    $el.prepend("<input type='hidden' class='origText' value='"+title+"'/>")
 
