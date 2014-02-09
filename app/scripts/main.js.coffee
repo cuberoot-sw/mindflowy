@@ -26,8 +26,12 @@ class Mind
     e.preventDefault()
 
   jQuery("body").on 'keydown.down', 'span.editable', (e) ->
-    console.log 'keydown.down', e.which, $(this).html()
+    e.stopPropagation()
     e.preventDefault()
+    console.log 'keydown.down', e.which, $(this).html()
+    parents = $(this).parents("li")
+    console.log("focus on: ", parents.next().find(".editable").first().html())
+    parents.next().find(".editable").first().focus()
 
   jQuery("body").on 'keydown.return', 'span.editable', (e) ->
     console.log 'keydown.return', e.which
@@ -47,14 +51,15 @@ class Mind
 
   jQuery("body").on 'blur', 'span.editable', (e) ->
     e.preventDefault()
+    e.stopPropagation()
     $this = $(this)
     htmlold = $this.parent("li").find('.origText').val()
     htmlnew = $this.html()
 
     console.log "blur", htmlold, htmlnew
-    $this.parent("li").find('.origText').val(htmlnew)
 
     if htmlold isnt htmlnew
+      $this.parent("li").find('.origText').val(htmlnew)
       if htmlold is null or htmlold is ""
         $this.trigger "change", ["newNode"]
       else if htmlnew is null or htmlnew is ""

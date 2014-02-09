@@ -35,8 +35,13 @@ Mind = (function() {
   });
 
   jQuery("body").on('keydown.down', 'span.editable', function(e) {
+    var parents;
+    e.stopPropagation();
+    e.preventDefault();
     console.log('keydown.down', e.which, $(this).html());
-    return e.preventDefault();
+    parents = $(this).parents("li");
+    console.log("focus on: ", parents.next().find(".editable").first().html());
+    return parents.next().find(".editable").first().focus();
   });
 
   jQuery("body").on('keydown.return', 'span.editable', function(e) {
@@ -61,12 +66,13 @@ Mind = (function() {
   jQuery("body").on('blur', 'span.editable', function(e) {
     var $this, htmlnew, htmlold;
     e.preventDefault();
+    e.stopPropagation();
     $this = $(this);
     htmlold = $this.parent("li").find('.origText').val();
     htmlnew = $this.html();
     console.log("blur", htmlold, htmlnew);
-    $this.parent("li").find('.origText').val(htmlnew);
     if (htmlold !== htmlnew) {
+      $this.parent("li").find('.origText').val(htmlnew);
       if (htmlold === null || htmlold === "") {
         return $this.trigger("change", ["newNode"]);
       } else if (htmlnew === null || htmlnew === "") {
