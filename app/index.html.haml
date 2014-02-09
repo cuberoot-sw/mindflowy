@@ -37,22 +37,17 @@
                 #ddtopmenubar.mattblackmenu
                   / UnorderedList
                   %ul
-                    / List
-                    %li
-                      %a{:href => "#.banner-container"} Home
-                    %li
-                      %a{:href => "#", :rel => "ddsubmenustyle"}
-                        Pages
-                        %span.caret
-                          %img.downarrowpointer{:src => "images/arrow-down.gif", :style => "width: 11px; height: 7px;"}/
-                      / Dropdown Submenu Style
                     %li
                       %a#help{:href => "#.help"} Help
+                    %li#forSignup
+                      %button.btn.btn-primary.btn-lg{"data-target" => "#mySignup", "data-toggle" => "modal"}
+                        Sign up
+                    %li#forLogin
+                      %button.btn.btn-primary.btn-lg{"data-target" => "#myLogin", "data-toggle" => "modal"}
+                        Login
                     %li
                       %button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal"}
                         Keyboard Shortcuts
-                    %li
-                      %a{:href => "#.contact-us"} Account
 
     .container
       .jumbotron
@@ -92,6 +87,66 @@
               .modal-footer
                 %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
 
+
+      #myLogin.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h4#myModalLabel.modal-title Login
+            .modal-body
+              %form.form-horizontal
+                %fieldset
+                  / Form Name
+                  %legend/
+                  %h3 Have an account? Sign In
+                  / Text input
+                  .form-group
+                    %label.col-md-1.control-label{:for => "email"}
+                    .col-md-12
+                      %input#email.form-control.input-md{:name => "email", :placeholder => "Email", :type => "text"}/
+                  / Password input
+                  .form-group
+                    %label.col-md-1.control-label{:for => "password"}
+                    .col-md-12
+                      %input#password.form-control.input-md{:name => "password", :placeholder => "Password", :type => "password"}/
+                  / Button (Double)
+                  .form-group
+                    %label.col-md-1.control-label{:for => "login"}
+                    .col-md-5
+                      %button#login.btn.btn-block.btn-success(name="login") Login
+                    .col-md-5
+
+
+      #mySignup.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
+              %h4#myModalLabel.modal-title Sign up
+            .modal-body
+              %form.form-horizontal
+                %fieldset
+                  / Form Name
+                  %legend/
+                  / Text input
+                  .form-group
+                    %label.col-md-1.control-label{:for => "email"}
+                    .col-md-12
+                      %input#email.form-control.input-md{:name => "email", :placeholder => "Email", :type => "email"}/
+                  / Password input
+                  .form-group
+                    %label.col-md-1.control-label{:for => "password"}
+                    .col-md-12
+                      %input#password.form-control.input-md{:name => "password", :placeholder => "Password", :type => "password"}/
+                  / Button (Double)
+                  .form-group
+                    %label.col-md-1.control-label{:for => "login"}
+                    .col-md-5
+                      %button#signup.btn.btn-block.btn-success(name ="signup") Sign up
+                    .col-md-5
+
+
     / Google Analytics: change UA-XXXXX-X to be your site's ID.
     :javascript
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -106,7 +161,8 @@
     / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
     %script{:src => "scripts/modal.js"}
-    %script{:src => "scripts/FB.js"}
+    %script{:src => "scripts/fb.js"}
+    %script{:src => "scripts/fb-auth.js"}
     %script{:src => "scripts/jquery.hotkeys.js"}
     %script{:src => "scripts/main.js"}
     / endbuild
