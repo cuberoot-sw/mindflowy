@@ -8,19 +8,6 @@ class Mind
 
     # add a data-parent attribute, which we use to locate parent elements
     $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId)
-    $el.on "down", (event, key) ->
-      console.log "on-down", "---", key.which
-      $el.find("span.editable").next().addClass("red")
-    $el.on "up", (event, key) ->
-      console.log "on-up", "---", key.which
-    $el.on "tab", (event, key) ->
-      console.log "on-tab", "---", key.which
-    $el.on "shiftTab", (event, key) ->
-      console.log "on-shiftTab", "---", key.which
-    $el.on "delete", (event, type) ->
-      console.log "on-delete", "---", type
-    #$el.on "change", (event, type) ->
-      # not needed, down should trigger blur and it should "update" record
 
   jQuery("body").on 'keydown.tab', 'span.editable', (e) ->
     console.log 'keydown.tab', e.which
@@ -41,6 +28,13 @@ class Mind
   jQuery("body").on 'keydown.return', 'span.editable', (e) ->
     console.log 'keydown.return', e.which
     e.preventDefault()
+    $node = $(this).closest("[data-id]")
+    nodeId = $node.attr("data-id") or null
+    parentId = $node.attr("data-parent-id") or null
+    FB.push
+      title: null
+      parent: parentId
+
 
   jQuery("body").on 'blur', 'span.editable', (e) ->
     e.preventDefault()
