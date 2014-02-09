@@ -20,8 +20,22 @@ Mind = (function() {
   };
 
   jQuery("body").on('keydown.tab', 'span.editable', function(e) {
+    var $prev, newParentId, nodeId, title;
+    e.preventDefault();
     console.log('keydown.tab', e.which);
-    return e.preventDefault();
+    $prev = $(this).parent().prev();
+    if ($prev.length === 0) {
+
+    } else {
+      newParentId = $prev.attr("data-id");
+      nodeId = $(this).parent().attr("data-id");
+      title = $(this).html();
+      FB.update(nodeId, {
+        title: title,
+        parent: newParentId
+      });
+      return $prev.children("ul").append($(this).parent());
+    }
   });
 
   jQuery("body").on('keydown.Shift_tab', 'span.editable', function(e) {
