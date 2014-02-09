@@ -22,16 +22,19 @@ class Mind
     e.preventDefault()
 
   jQuery("body").on 'keydown.up', 'span.editable', (e) ->
+    e.stopPropagation()
+    e.preventDefault()
     console.log 'keydown.up', e.which, $(this).html()
+    $(this).parent().prev().children(".editable").first().focus()
+    console.log("focus on: ",$(this).parent().prev().children(".editable").first().html())
     e.preventDefault()
 
   jQuery("body").on 'keydown.down', 'span.editable', (e) ->
     e.stopPropagation()
     e.preventDefault()
     console.log 'keydown.down', e.which, $(this).html()
-    parents = $(this).parents("li")
-    console.log("focus on: ", parents.next().find(".editable").first().html())
-    parents.next().find(".editable").first().focus()
+    $(this).parent().next().children(".editable").first().focus()
+    console.log("focus on: ",$(this).parent().next().children(".editable").first().html())
 
   jQuery("body").on 'keydown.return', 'span.editable', (e) ->
     console.log 'keydown.return', e.which
