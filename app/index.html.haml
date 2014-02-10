@@ -49,6 +49,11 @@
                     %li
                       %button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal"}
                         Keyboard Shortcuts
+                    %li
+                      %a.twitter-share-button{"data-text" => "Check out undefined by cuberoot", "data-url" => "http://ss14-team-59.divshot.io", "data-via" => "staticshowdown", :href => "https://twitter.com/share"} Tweet
+                      :javascript
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
 
     .container
       .row
@@ -57,12 +62,51 @@
           %p
             Your Digital Brain. Take control by visualizing all your open loops, tasks, and ideas in your Brain.
       .row.service
-        %ul#records
-          %li#recordTemplate
-            %span.editable(contenteditable="true")
-            %a.delete{:href => "#"}
-              %i.fa.fa-times
-            %ul
+        .col-md-9.col-sm-9
+          %ul#records
+            %li#recordTemplate
+              %span.editable(contenteditable="true")
+              %a.delete{:href => "#"}
+                %i.fa.fa-times
+              %ul
+
+        #sidebar.col-md-3.col-sm-3
+          %h3
+            %i.fa.fa-keyboard-o.fa-lg
+          %table.table.table-striped
+            %tr
+              %td
+                %strong Select
+              %td
+                a node and start typing
+            %tr
+              %td
+                %strong Enter
+              %td
+                add a new node
+            %tr
+              %td
+                %strong Shift+Tab
+              %td
+                un-indent
+            %tr
+              %td
+                %strong Tab
+              %td
+                indent
+            %tr
+              %td
+                %strong Up Arrow
+              %td
+                node above
+            %tr
+              %td
+                %strong Down Arrow
+              %td
+                node bellow
+
+
+
         #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
           .modal-dialog
             .modal-content
@@ -172,5 +216,4 @@
     %script{:src => "scripts/jquery.hotkeys.js"}
     %script{:src => "scripts/main.js"}
     / endbuild
-
 
