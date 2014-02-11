@@ -38,7 +38,8 @@
                   / UnorderedList
                   %ul
                     %li
-                      %a#help{:href => "#.help"} Help
+                      %a#account{:href => "#"} Account
+                      %a#signout{:href => "#"} Sign out
                     %li#forSignup
                       %button.btn.btn-primary.btn-lg{"data-target" => "#mySignup", "data-toggle" => "modal"}
                         Sign up
@@ -102,14 +103,14 @@
                   %h3 Have an account? Sign In
                   / Text input
                   .form-group
-                    %label.col-md-1.control-label{:for => "email"}
+                    %label.col-md-1.control-label{:for => "lemail"}
                     .col-md-12
-                      %input#email.form-control.input-md{:name => "email", :placeholder => "Email", :type => "text"}/
+                      %input#lemail.form-control.input-md{:name => "lemail", :placeholder => "Email", :type => "email"}/
                   / Password input
                   .form-group
-                    %label.col-md-1.control-label{:for => "password"}
+                    %label.col-md-1.control-label{:for => "lpassword"}
                     .col-md-12
-                      %input#password.form-control.input-md{:name => "password", :placeholder => "Password", :type => "password"}/
+                      %input#lpassword.form-control.input-md{:name => "lpassword", :placeholder => "Password", :type => "password"}/
                   / Button (Double)
                   .form-group
                     %label.col-md-1.control-label{:for => "login"}
@@ -131,14 +132,14 @@
                   %legend/
                   / Text input
                   .form-group
-                    %label.col-md-1.control-label{:for => "email"}
+                    %label.col-md-1.control-label{:for => "semail"}
                     .col-md-12
-                      %input#email.form-control.input-md{:name => "email", :placeholder => "Email", :type => "email"}/
+                      %input#semail.form-control.input-md{:name => "semail", :placeholder => "Email", :type => "email"}/
                   / Password input
                   .form-group
-                    %label.col-md-1.control-label{:for => "password"}
+                    %label.col-md-1.control-label{:for => "spassword"}
                     .col-md-12
-                      %input#password.form-control.input-md{:name => "password", :placeholder => "Password", :type => "password"}/
+                      %input#spassword.form-control.input-md{:name => "spassword", :placeholder => "Password", :type => "password"}/
                   / Button (Double)
                   .form-group
                     %label.col-md-1.control-label{:for => "login"}

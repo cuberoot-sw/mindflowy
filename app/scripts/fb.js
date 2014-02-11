@@ -5,7 +5,7 @@ this.FB = (function() {
     this.name = name;
   }
 
-  rootRef = new Firebase("https://mindblowwy.firebaseio.com/nodes");
+  rootRef = new Firebase("https://incandescent-fire-4492.firebaseio.com/nodes");
 
   FB.remove = function(id) {
     return rootRef.child(id).remove();
