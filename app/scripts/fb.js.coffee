@@ -1,33 +1,35 @@
-class @FB
+define ->
+  class FB
+    FBURL = "https://incandescent-fire-4492.firebaseio.com"
+    #nodeRef = new Firebase(FBURL+"/public/nodes");
+    nodeRef = null
 
-  constructor: (@name) ->
+    constructor: (root) ->
+      console.log "in FB", root
+      nodeRef = new Firebase(FBURL+root+"nodes");
 
-  rootRef = new Firebase("https://incandescent-fire-4492.firebaseio.com/nodes");
+    remove : (id) ->
+      nodeRef.child(id).remove()
 
-  @remove = (id) ->
-    rootRef.child(id).remove()
+    update : (id, hash) ->
+      nodeRef.child(id).update(hash)
 
-  @update = (id, hash) ->
-    rootRef.child(id).update(hash)
+    push : (hash) ->
+      nodeRef.push(hash)
 
-  @push = (hash) ->
-    rootRef.push(hash)
+    child_added : (cb) ->
+      nodeRef.on "child_added", (snapshot) ->
+        message = snapshot.val()
+        cb(snapshot.name(), snapshot.val())
 
-  @child_added = (cb) ->
-    rootRef.on "child_added", (snapshot) ->
-      message = snapshot.val()
-      cb(snapshot.name(), snapshot.val())
+    child_removed : (cb) ->
+      nodeRef.on "child_removed", (snapshot) ->
+        cb(snapshot.name(), snapshot.val())
 
-  @child_removed = (cb) ->
-    rootRef.on "child_removed", (snapshot) ->
-      cb(snapshot.name(), snapshot.val())
+    child_changed : (cb) ->
+      nodeRef.on "child_changed", (snapshot) ->
+        cb(snapshot.name(), snapshot.val())
 
-  @child_changed = (cb) ->
-    rootRef.on "child_changed", (snapshot) ->
-      cb(snapshot.name(), snapshot.val())
+    FB
 
-jQuery("body").on "hover",".editable", (->
-  $(this).next("a").show()
-), ->
-  $(this).next("a").hide()
 

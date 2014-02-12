@@ -1,50 +1,52 @@
-this.FB = (function() {
-  var rootRef;
+define(function() {
+  var FB;
+  return FB = (function() {
+    var FBURL, nodeRef;
 
-  function FB(name) {
-    this.name = name;
-  }
+    FBURL = "https://incandescent-fire-4492.firebaseio.com";
 
-  rootRef = new Firebase("https://incandescent-fire-4492.firebaseio.com/nodes");
+    nodeRef = null;
 
-  FB.remove = function(id) {
-    return rootRef.child(id).remove();
-  };
+    function FB(root) {
+      console.log("in FB", root);
+      nodeRef = new Firebase(FBURL + root + "nodes");
+    }
 
-  FB.update = function(id, hash) {
-    return rootRef.child(id).update(hash);
-  };
+    FB.prototype.remove = function(id) {
+      return nodeRef.child(id).remove();
+    };
 
-  FB.push = function(hash) {
-    return rootRef.push(hash);
-  };
+    FB.prototype.update = function(id, hash) {
+      return nodeRef.child(id).update(hash);
+    };
 
-  FB.child_added = function(cb) {
-    return rootRef.on("child_added", function(snapshot) {
-      var message;
-      message = snapshot.val();
-      return cb(snapshot.name(), snapshot.val());
-    });
-  };
+    FB.prototype.push = function(hash) {
+      return nodeRef.push(hash);
+    };
 
-  FB.child_removed = function(cb) {
-    return rootRef.on("child_removed", function(snapshot) {
-      return cb(snapshot.name(), snapshot.val());
-    });
-  };
+    FB.prototype.child_added = function(cb) {
+      return nodeRef.on("child_added", function(snapshot) {
+        var message;
+        message = snapshot.val();
+        return cb(snapshot.name(), snapshot.val());
+      });
+    };
 
-  FB.child_changed = function(cb) {
-    return rootRef.on("child_changed", function(snapshot) {
-      return cb(snapshot.name(), snapshot.val());
-    });
-  };
+    FB.prototype.child_removed = function(cb) {
+      return nodeRef.on("child_removed", function(snapshot) {
+        return cb(snapshot.name(), snapshot.val());
+      });
+    };
 
-  return FB;
+    FB.prototype.child_changed = function(cb) {
+      return nodeRef.on("child_changed", function(snapshot) {
+        return cb(snapshot.name(), snapshot.val());
+      });
+    };
 
-})();
+    FB;
 
-jQuery("body").on("hover", ".editable", (function() {
-  return $(this).next("a").show();
-}), function() {
-  return $(this).next("a").hide();
+    return FB;
+
+  })();
 });

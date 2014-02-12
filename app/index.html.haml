@@ -210,10 +210,11 @@
     %script(src="https://cdn.firebase.com/v0/firebase-simple-login.js")
     / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
+    %script{:src => "scripts/require.js", "data-main" => "scripts/require.config"}
+    -#%script{:src => "scripts/delme.js"}
     %script{:src => "scripts/modal.js"}
-    %script{:src => "scripts/fb.js"}
-    %script{:src => "scripts/fb-auth.js"}
+    -#%script{:src => "scripts/fb-auth.js"}
+    -#%script{:src => "scripts/require.config.js"}
     %script{:src => "scripts/jquery.hotkeys.js"}
-    %script{:src => "scripts/main.js"}
     / endbuild
 
