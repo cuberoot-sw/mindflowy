@@ -14,11 +14,6 @@ require.config({
     }
 });
 
-//console.log("")
-
-require(["delme"], function(Delme){
-  console.log("inside require Delme")
-})
 require(["fb-auth"], function(){
   console.log("inside require fb-auth")
 })
