@@ -67,7 +67,8 @@ define(function() {
             title: title,
             parent: newParentId
           });
-          return $prev.children("ul").append($(this).parent());
+          $prev.children("ul").append($(this).parent());
+          return $(this).parent().find("span.editable").focus();
         }
       });
       jQuery("body").on('keydown.Shift_tab', 'span.editable', function(e) {
@@ -82,9 +83,11 @@ define(function() {
         if ($parents.length === 2) {
           newParentId = null;
           $("#records").append($(this).parent());
+          $(this).parent().find("span.editable").focus();
         } else {
           newParentId = $($parents[2]).attr("data-id");
           $newParent = $($parents[2]).children("ul").append($(this).parent());
+          $(this).parent().find("span.editable").focus();
         }
         nodeId = $(this).parent().attr("data-id");
         title = $(this).html();

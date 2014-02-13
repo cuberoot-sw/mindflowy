@@ -60,6 +60,7 @@ define ->
             title: title
             parent: newParentId
           $prev.children("ul").append($(this).parent())
+          $(this).parent().find("span.editable").focus()
 
       jQuery("body").on 'keydown.Shift_tab', 'span.editable', (e) ->
         console.log 'keydown.Shift_tab', e.which
@@ -71,9 +72,11 @@ define ->
         if $parents.length == 2
           newParentId = null
           $("#records").append($(this).parent())
+          $(this).parent().find("span.editable").focus()
         else
           newParentId = $($parents[2]).attr("data-id")
           $newParent = $($parents[2]).children("ul").append($(this).parent())
+          $(this).parent().find("span.editable").focus()
 
         nodeId = $(this).parent().attr("data-id")
         title = $(this).html()
