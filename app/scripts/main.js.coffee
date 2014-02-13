@@ -1,6 +1,7 @@
 define ->
   class Mind
     @NEW_NODE_ADDED: false
+    @NEW_NODE_PREV: null
 
     constructor :(fb) ->
       console.log "in Mind constructor", fb
@@ -39,6 +40,7 @@ define ->
         else
           title = null
         Mind.NEW_NODE_ADDED = true
+        Mind.NEW_NODE_PREV = $node
         firebase.push
           title: title
           parent: parentId
@@ -157,10 +159,13 @@ define ->
       console.log "displaying id:", id, " parentId:", parentId, title
 
       # add a data-parent attribute, which we use to locate parent elements
-      $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId)
       if Mind.NEW_NODE_ADDED
+        $el.insertAfter(Mind.NEW_NODE_PREV).attr("data-id", id).attr("data-parent-id", parentId)
         $el.find("span.editable").focus()
         Mind.NEW_NODE_ADDED = false
+        Mind.NEW_NODE_PREV = null
+      else
+        $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId)
 
     # Helpers
     findParent = (parentId) ->

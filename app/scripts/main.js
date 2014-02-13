@@ -5,6 +5,8 @@ define(function() {
 
     Mind.NEW_NODE_ADDED = false;
 
+    Mind.NEW_NODE_PREV = null;
+
     function Mind(fb) {
       var firebase;
       console.log("in Mind constructor", fb);
@@ -45,6 +47,7 @@ define(function() {
           title = null;
         }
         Mind.NEW_NODE_ADDED = true;
+        Mind.NEW_NODE_PREV = $node;
         firebase.push({
           title: title,
           parent: parentId
@@ -164,10 +167,13 @@ define(function() {
       $parent = (parentId ? findParent(parentId) : $("#records"));
       $el = makeListItem(title, id);
       console.log("displaying id:", id, " parentId:", parentId, title);
-      $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId);
       if (Mind.NEW_NODE_ADDED) {
+        $el.insertAfter(Mind.NEW_NODE_PREV).attr("data-id", id).attr("data-parent-id", parentId);
         $el.find("span.editable").focus();
-        return Mind.NEW_NODE_ADDED = false;
+        Mind.NEW_NODE_ADDED = false;
+        return Mind.NEW_NODE_PREV = null;
+      } else {
+        return $el.appendTo($parent).attr("data-id", id).attr("data-parent-id", parentId);
       }
     };
 
