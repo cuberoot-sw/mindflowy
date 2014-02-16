@@ -23,14 +23,14 @@ define ->
         $child = $("[data-id='"+id+"']")
         if $parent.has("[data-id='"+id+"']").length > 0
           console.log "child exists"
-          $child.find("span.editable").html(data.title)
+          $child.find(".editable:first").text(data.title)
         else
           console.log "appending child"
           #change_child id, data
       this.handleUIEvents(firebase)
 
     handleUIEvents: (firebase)->
-      jQuery("body").on 'keydown.return', 'span.editable', (e) ->
+      jQuery("body").on 'keydown.return', '.editable', (e) ->
         console.log 'keydown.return', e.which
         $node = $(this).closest("[data-id]")
         nodeId = $node.attr("data-id") or null
@@ -46,7 +46,7 @@ define ->
           parent: parentId
         e.preventDefault()
 
-      jQuery(document).on 'keydown.tab', 'span.editable', (e) ->
+      jQuery(document).on 'keydown.tab', '.editable', (e) ->
         e.preventDefault()
         e.stopPropagation()
         console.log 'keydown.tab', e.which
@@ -62,9 +62,9 @@ define ->
             title: title
             parent: newParentId
           $prev.children("ul").append($(this).parent())
-          $(this).parent().find("span.editable").focus()
+          $(this).parent().find(".editable").focus()
 
-      jQuery("body").on 'keydown.Shift_tab', 'span.editable', (e) ->
+      jQuery("body").on 'keydown.Shift_tab', '.editable', (e) ->
         console.log 'keydown.Shift_tab', e.which
         e.preventDefault()
         e.stopPropagation()
@@ -74,11 +74,11 @@ define ->
         if $parents.length == 2
           newParentId = null
           $("#records").append($(this).parent())
-          $(this).parent().find("span.editable").focus()
+          $(this).parent().find(".editable").focus()
         else
           newParentId = $($parents[2]).attr("data-id")
           $newParent = $($parents[2]).children("ul").append($(this).parent())
-          $(this).parent().find("span.editable").focus()
+          $(this).parent().find(".editable").focus()
 
         nodeId = $(this).parent().attr("data-id")
         title = $(this).html()
@@ -86,32 +86,28 @@ define ->
           title: title
           parent: newParentId
 
-      jQuery("body").on 'keydown.up', 'span.editable', (e) ->
+      jQuery("body").on 'keydown.up', '.editable', (e) ->
         e.stopPropagation()
         e.preventDefault()
-        console.log 'keydown.up', e.which, $(this).html()
-        $(this).parent().prev().children(".editable").first().focus()
-        console.log("focus on: ",$(this).parent().prev().children(".editable").first().html())
-        e.preventDefault()
+        getPrevEd($(this)).focus()
 
-      jQuery("body").on 'keydown.down', 'span.editable', (e) ->
+      jQuery("body").on 'keydown.down', '.editable', (e) ->
         e.stopPropagation()
         e.preventDefault()
-        console.log 'keydown.down', e.which, $(this).html()
-        $(this).parent().next().children(".editable").first().focus()
-        console.log("focus on: ",$(this).parent().next().children(".editable").first().html())
+        getNextEd($(this)).focus()
 
-      jQuery("body").on 'blur', 'span.editable', (e) ->
+      jQuery("body").on 'blur', '.editable', (e) ->
         e.preventDefault()
         e.stopPropagation()
         $this = $(this)
-        htmlold = $this.parent("li").find('.origText').val()
-        htmlnew = $this.html()
+        htmlold = $this.parent("li").find('.origText').text()
+        #htmlold = $('<div/>').text(htmlold).html()
+        htmlnew = $this.text()
 
         console.log "blur", htmlold, htmlnew
 
         if htmlold isnt htmlnew
-          $this.parent("li").find('.origText').val(htmlnew)
+          $this.parent("li").find('.origText:first').text(htmlnew)
           if htmlold is null or htmlold is ""
             $this.trigger "change", ["newNode"]
           else if htmlnew is null or htmlnew is ""
@@ -132,7 +128,7 @@ define ->
         false
 
       jQuery("body").on "change", ".editable", (event, type) ->
-        title = $(this).html()
+        title = $(this).text()
         $node = $(this).closest("[data-id]")
         nodeId = $node.attr("data-id") or null
         parentId = $node.attr("data-parent-id") or null
@@ -151,6 +147,46 @@ define ->
       #jQuery("body").on "keypress", ".editable", '$', (event) ->
         #console.log "aaaa: ", e.which
 
+    getItem = ($ed) ->
+      $($ed).parents("li.item").first()
+
+    getPrevEd = ($ed) ->
+      next = getItemIndex($ed, "prev")
+      getEd $(".item[data-id='#{next}']")
+
+    getSubItems = ($item) ->
+      $item.find(".item")
+
+    getParentItem = ($ed) ->
+      getItem($ed).parents(".item").first()
+
+    getNextEd = ($ed) ->
+      next = getItemIndex($ed, "next")
+      getEd $(".item[data-id='#{next}']")
+
+    getItemIndex = ($ed, type) ->
+      $item = getItem($ed)
+      all = $(".item").map ->
+        $(this).attr("data-id")
+
+      ix = $.inArray($item.attr("data-id"), all)
+
+      if type == "next"
+        if ix == all.length - 1
+          ix = -1
+        all[ix+1]
+      else
+        if ix == 0
+          ix = all.length
+        all[ix-1]
+
+    getEd = ($item) ->
+      $item.find(".editable").first()
+
+    getDataId = ($item) ->
+      return $($item).attr('data-id') if $($item).attr('data-id')
+      getItem($item).attr('data-id')
+
     # add new records at the appropriate level when a button is clicked
     # alt/option key is down
     displayTitleMessage = (id, title, parentId) ->
@@ -161,7 +197,7 @@ define ->
       # add a data-parent attribute, which we use to locate parent elements
       if Mind.NEW_NODE_ADDED
         $el.insertAfter(Mind.NEW_NODE_PREV).attr("data-id", id).attr("data-parent-id", parentId)
-        $el.find("span.editable").focus()
+        $el.find(".editable").focus()
         Mind.NEW_NODE_ADDED = false
         Mind.NEW_NODE_PREV = null
       else
@@ -181,9 +217,9 @@ define ->
       # remove the id attr
       # enter the <span> tag and use .text() to escape title
       # navigate back to the cloned element and return it
-      $el = $("#recordTemplate").clone().attr("id", null).find("span.editable").text(title).end()
+      $el = $("#recordTemplate").clone().attr("id", null).find(".editable").text(title).end()
       #$el.find("span.editable").wysiwygEvt()
       #$el.prepend("<span class='nodeId'>#"+id+"</span>")
-      $el.prepend("<input type='hidden' class='origText' value='"+title+"'/>")
+      $el.prepend("<div class='origText'>#{title}</div>")
 
     Mind
