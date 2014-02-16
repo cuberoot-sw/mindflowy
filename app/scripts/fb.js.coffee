@@ -30,6 +30,10 @@ define ->
       nodeRef.on "child_changed", (snapshot) ->
         cb(snapshot.name(), snapshot.val())
 
+    once : (cb) ->
+      nodeRef.once "value", (v) ->
+        cb(v)
+
     FB
 
 

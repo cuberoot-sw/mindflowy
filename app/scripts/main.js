@@ -11,6 +11,10 @@ define(function() {
       var firebase;
       console.log("in Mind constructor", fb);
       firebase = fb;
+      firebase.once(function(v) {
+        console.log("in once", v.val());
+        return $(".item:first").next().find(".editable:first").focus();
+      });
       firebase.child_added(function(id, data) {
         console.log("child_added", id);
         displayTitleMessage(id, data.title, data.parent);

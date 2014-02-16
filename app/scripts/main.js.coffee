@@ -6,6 +6,11 @@ define ->
     constructor :(fb) ->
       console.log "in Mind constructor", fb
       firebase = fb
+
+      firebase.once (v) ->
+        console.log "in once", v.val()
+        $(".item:first").next().find(".editable:first").focus()
+
       firebase.child_added (id, data)->
         console.log "child_added", id
         displayTitleMessage id, data.title, data.parent

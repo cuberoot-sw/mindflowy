@@ -44,6 +44,12 @@ define(function() {
       });
     };
 
+    FB.prototype.once = function(cb) {
+      return nodeRef.once("value", function(v) {
+        return cb(v);
+      });
+    };
+
     FB;
 
     return FB;
