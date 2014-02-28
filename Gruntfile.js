@@ -227,8 +227,9 @@ module.exports = function (grunt) {
         options: {
           baseUrl: "app/scripts",
           mainConfigFile: "app/scripts/require.config.js",
+          include: ['require.config'],
           name: "Main", // assumes a production build using almond
-          out: "main.js"
+          out: "dist/scripts/main.min.js"
         }
       }
     },
@@ -354,6 +355,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent',
     'haml',
+    'requirejs',
     'cssmin',
     'concat',
     'uglify',
