@@ -10,9 +10,10 @@ define ['fb', 'main'], (FB, Mind) ->
     else if user
       # user authenticated with Firebase
       console.log "User ID: " + user.id + ", Provider: " + user.provider
-      $("#account").html(user.email).show()
+      $("#account").html("Welcome #{user.email}").show()
       $("#forSignup").hide()
       $("#forLogin").hide()
+      $("#signout").show()
       $('#myLogin').modal('hide')
       $('#mySignup').modal('hide')
       $fb = new FB("/users/"+user.id+"/")
@@ -20,7 +21,7 @@ define ['fb', 'main'], (FB, Mind) ->
     else
       # user is logged out
       $("#account").hide()
-      $("#forSignup").hide()
+      $("#signout").hide()
       $("#forSignup").show()
       $("#forLogin").show()
       $fb = new FB("/public/")

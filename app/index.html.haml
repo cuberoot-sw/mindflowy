@@ -16,7 +16,7 @@
     / endbuild
     / Favicon
     %link{:href => "#", :rel => "shortcut icon"}/
-  %body
+  %body(spellcheck="false")
     / Header  Starts
     #undefined-sticky-wrapper.sticky-wrapper{:style => "height: 90px;"}
       %header{:style => ""}
@@ -47,13 +47,9 @@
                       %a{"data-target" => "#myLogin", "data-toggle" => "modal"}
                         Login
                     %li
-                      %a{"data-target" => "#myModal", "data-toggle" => "modal"}
-                        Keyboard Shortcuts
-                    %li
                       %a.twitter-share-button{"data-text" => "Check out undefined by cuberoot", "data-url" => "http://ss14-team-59.divshot.io", "data-via" => "staticshowdown", :href => "https://twitter.com/share"} Tweet
                       :javascript
                         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
-
 
     .container
       .row
@@ -107,37 +103,6 @@
 
 
 
-        #myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-          .modal-dialog
-            .modal-content
-              .modal-header
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} &times;
-                %h3#myModalLabel.modal-title Keyboard Shortcuts Guide
-              .modal-body
-                %dl
-                  %dt
-                    %strong.red Select
-                    a node and start typing
-                  %dt
-                    %strong.red Enter
-                    to add a new node
-                  %dt
-                    %strong.red Tab
-                    to indent
-                  %dt
-                    %strong.red Shift+Tab
-                    to un-indent
-                  %dt
-                    %strong.red Up Arrow
-                    go to previous node
-                  %dt
-                    %strong.red Down Arrow
-                    go to next node
-
-              .modal-footer
-                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
-
-
       #myLogin.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
         .modal-dialog
           .modal-content
@@ -162,7 +127,6 @@
                       %input#lpassword.form-control.input-md{:name => "lpassword", :placeholder => "Password", :type => "password"}/
                   / Button (Double)
                   .form-group
-                    %label.col-md-1.control-label{:for => "login"}
                     .col-md-5
                       %button#login.btn.btn-block.btn-success(name="login") Login
                     .col-md-5
@@ -191,7 +155,6 @@
                       %input#spassword.form-control.input-md{:name => "spassword", :placeholder => "Password", :type => "password"}/
                   / Button (Double)
                   .form-group
-                    %label.col-md-1.control-label{:for => "login"}
                     .col-md-5
                       %button#signup.btn.btn-block.btn-success(name ="signup") Sign up
                     .col-md-5
