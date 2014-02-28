@@ -222,6 +222,16 @@ module.exports = function (grunt) {
         }]
       }
     },
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: "app/scripts",
+          mainConfigFile: "app/scripts/require.config.js",
+          name: "Main", // assumes a production build using almond
+          out: "main.js"
+        }
+      }
+    },
     cssmin: {
       dist: {
         files: {

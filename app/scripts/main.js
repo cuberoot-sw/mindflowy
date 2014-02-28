@@ -255,3 +255,12 @@ define(function() {
 
   })();
 });
+
+$("#records").on("mouseover", "li", function(e) {
+  e.stopPropagation();
+  return $(this).children("a:first").show();
+});
+
+$("#records").on("mouseout", "li", function(e) {
+  return $(this).children("a:first").hide();
+});

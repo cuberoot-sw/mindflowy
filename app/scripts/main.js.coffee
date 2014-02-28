@@ -228,3 +228,9 @@ define ->
       $el.prepend("<div class='origText'>#{title}</div>")
 
     Mind
+
+$("#records").on "mouseover", "li", (e) ->
+  e.stopPropagation()
+  $(this).children("a:first").show()
+$("#records").on "mouseout", "li", (e) ->
+  $(this).children("a:first").hide()

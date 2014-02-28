@@ -21,8 +21,14 @@
 .jumbotron {
   margin: 50px auto 0 auto;
 }
-[contenteditable="true"] { padding: 2px;  }
+[contenteditable="true"] { padding: 2px;
+  margin-right: 20px;}
 [contenteditable="true"]:hover { outline: 1px dotted #ccc; }
+
+.editable:focus {
+  outline: 1px dotted #ccc;
+  /*background-color: #eee;*/
+}
 
 span.nodeId{font-size: .6em; color: "#8a8a8a"}
 
@@ -37,7 +43,10 @@ dt{font-weight: normal}
 
 a.delete i{color: #F75353;
   font-size: .8em;
-  /*display: none;*/
+}
+
+a.delete {
+  display: none;
 }
 
 .service {

@@ -41,13 +41,13 @@
                       %a#account{:href => "#"} Account
                       %a#signout{:href => "#"} Sign out
                     %li#forSignup
-                      %button.btn.btn-primary.btn-lg{"data-target" => "#mySignup", "data-toggle" => "modal"}
+                      %a{"data-target" => "#mySignup", "data-toggle" => "modal"}
                         Sign up
                     %li#forLogin
-                      %button.btn.btn-primary.btn-lg{"data-target" => "#myLogin", "data-toggle" => "modal"}
+                      %a{"data-target" => "#myLogin", "data-toggle" => "modal"}
                         Login
                     %li
-                      %button.btn.btn-primary.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal"}
+                      %a{"data-target" => "#myModal", "data-toggle" => "modal"}
                         Keyboard Shortcuts
                     %li
                       %a.twitter-share-button{"data-text" => "Check out undefined by cuberoot", "data-url" => "http://ss14-team-59.divshot.io", "data-via" => "staticshowdown", :href => "https://twitter.com/share"} Tweet
@@ -211,10 +211,7 @@
     / build:js scripts/main.js
     %script{:src => "bower_components/jquery/jquery.js"}
     %script{:src => "scripts/require.js", "data-main" => "scripts/require.config"}
-    -#%script{:src => "scripts/delme.js"}
     %script{:src => "scripts/modal.js"}
-    -#%script{:src => "scripts/fb-auth.js"}
-    -#%script{:src => "scripts/require.config.js"}
     %script{:src => "scripts/jquery.hotkeys.js"}
     / endbuild
 
