@@ -50,6 +50,10 @@ define(function() {
       });
     };
 
+    FB.prototype.off = function() {
+      return nodeRef.off();
+    };
+
     FB;
 
     return FB;

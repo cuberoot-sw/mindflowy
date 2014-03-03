@@ -1,7 +1,13 @@
 define ['fb', 'main'], (FB, Mind) ->
   chatRef = new Firebase("https://incandescent-fire-4492.firebaseio.com")
 
+  $fb = null
+
   auth = new FirebaseSimpleLogin chatRef, (error, user) ->
+    if $fb isnt null
+      $fb.off()
+      console.log "$fb.off"
+    $("#records li:not(:first)").remove()
     console.log "FirebaseSimpleLogin"
     if error
       # an error occurred while attempting login
@@ -34,10 +40,12 @@ define ['fb', 'main'], (FB, Mind) ->
     email = $('#semail').val()
     password = $('#spassword').val()
     auth.createUser email, password, (error, user) ->
-      if user
-        # user authenticated with Firebase
-        console.log "User ID: " + user.id + ", Provider: " + user.provider
-    return false
+       if !error
+         auth.login 'password', {email, password}
+         # user authenticated with Firebase
+         console.log "User ID: " + user.id + ", Provider: " + user.provider
+       else
+        console.log(error)
 
   $("body").on "click", "#login", (e) ->
     e.preventDefault()

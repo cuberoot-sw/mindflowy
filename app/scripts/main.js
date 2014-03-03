@@ -13,6 +13,12 @@ define(function() {
       firebase = fb;
       firebase.once(function(v) {
         console.log("in once", v.val());
+        if (v.val() === null) {
+          firebase.push({
+            title: " ",
+            parent: null
+          });
+        }
         return $(".item:first").next().find(".editable:first").focus();
       });
       firebase.child_added(function(id, data) {
@@ -41,6 +47,8 @@ define(function() {
     Mind.prototype.handleUIEvents = function(firebase) {
       jQuery("body").on('keydown.return', '.editable', function(e) {
         var $node, nodeId, parentId, title;
+        e.preventDefault();
+        e.stopPropagation();
         console.log('keydown.return', e.which);
         $node = $(this).closest("[data-id]");
         nodeId = $node.attr("data-id") || null;

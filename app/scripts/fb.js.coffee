@@ -34,6 +34,9 @@ define ->
       nodeRef.once "value", (v) ->
         cb(v)
 
+    off : () ->
+      nodeRef.off()
+
     FB
 
 

@@ -1,8 +1,13 @@
 define(['fb', 'main'], function(FB, Mind) {
-  var auth, chatRef;
+  var $fb, auth, chatRef;
   chatRef = new Firebase("https://incandescent-fire-4492.firebaseio.com");
+  $fb = null;
   auth = new FirebaseSimpleLogin(chatRef, function(error, user) {
-    var $fb;
+    if ($fb !== null) {
+      $fb.off();
+      console.log("$fb.off");
+    }
+    $("#records li:not(:first)").remove();
     console.log("FirebaseSimpleLogin");
     if (error) {
       console.log(error.message);
@@ -31,12 +36,17 @@ define(['fb', 'main'], function(FB, Mind) {
     e.preventDefault();
     email = $('#semail').val();
     password = $('#spassword').val();
-    auth.createUser(email, password, function(error, user) {
-      if (user) {
+    return auth.createUser(email, password, function(error, user) {
+      if (!error) {
+        auth.login('password', {
+          email: email,
+          password: password
+        });
         return console.log("User ID: " + user.id + ", Provider: " + user.provider);
+      } else {
+        return console.log(error);
       }
     });
-    return false;
   });
   $("body").on("click", "#login", function(e) {
     var email, password;

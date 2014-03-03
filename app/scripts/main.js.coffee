@@ -9,6 +9,11 @@ define ->
 
       firebase.once (v) ->
         console.log "in once", v.val()
+        if v.val() == null
+          firebase.push
+            title: " "
+            parent: null
+
         $(".item:first").next().find(".editable:first").focus()
 
       firebase.child_added (id, data)->
@@ -36,6 +41,8 @@ define ->
 
     handleUIEvents: (firebase)->
       jQuery("body").on 'keydown.return', '.editable', (e) ->
+        e.preventDefault()
+        e.stopPropagation()
         console.log 'keydown.return', e.which
         $node = $(this).closest("[data-id]")
         nodeId = $node.attr("data-id") or null
