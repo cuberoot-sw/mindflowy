@@ -10,6 +10,7 @@ define ->
       firebase.once (v) ->
         console.log "in once", v.val()
         if v.val() == null
+          $("#records").unbind()
           firebase.push
             title: " "
             parent: null
@@ -58,7 +59,7 @@ define ->
           parent: parentId
         e.preventDefault()
 
-      jQuery(document).on 'keydown.tab', '.editable', (e) ->
+      jQuery("body").on 'keydown.tab', '.editable', (e) ->
         e.preventDefault()
         e.stopPropagation()
         console.log 'keydown.tab', e.which
@@ -241,3 +242,7 @@ $("#records").on "mouseover", "li", (e) ->
   $(this).children("a:first").show()
 $("#records").on "mouseout", "li", (e) ->
   $(this).children("a:first").hide()
+$("a#try_it").on "click", (e) ->
+  e.preventDefault()
+  $(".home-index-div").hide()
+  $(".mind-flowy-div").show()

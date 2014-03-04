@@ -14,6 +14,7 @@ define(function() {
       firebase.once(function(v) {
         console.log("in once", v.val());
         if (v.val() === null) {
+          $("#records").unbind();
           firebase.push({
             title: " ",
             parent: null
@@ -66,7 +67,7 @@ define(function() {
         });
         return e.preventDefault();
       });
-      jQuery(document).on('keydown.tab', '.editable', function(e) {
+      jQuery("body").on('keydown.tab', '.editable', function(e) {
         var $prev, newParentId, nodeId, title;
         e.preventDefault();
         e.stopPropagation();
@@ -271,4 +272,10 @@ $("#records").on("mouseover", "li", function(e) {
 
 $("#records").on("mouseout", "li", function(e) {
   return $(this).children("a:first").hide();
+});
+
+$("a#try_it").on("click", function(e) {
+  e.preventDefault();
+  $(".home-index-div").hide();
+  return $(".mind-flowy-div").show();
 });
