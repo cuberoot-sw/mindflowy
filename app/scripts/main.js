@@ -84,7 +84,7 @@ define(function() {
             parent: newParentId
           });
           $prev.children("ul").append($(this).parent());
-          return $(this).parent().find(".editable").focus();
+          return $(this).parent().find(".editable:first").focus();
         }
       });
       jQuery("body").on('keydown.Shift_tab', '.editable', function(e) {
@@ -99,11 +99,11 @@ define(function() {
         if ($parents.length === 2) {
           newParentId = null;
           $("#records").append($(this).parent());
-          $(this).parent().find(".editable").focus();
+          $(this).parent().find(".editable:first").focus();
         } else {
           newParentId = $($parents[2]).attr("data-id");
           $newParent = $($parents[2]).children("ul").append($(this).parent());
-          $(this).parent().find(".editable").focus();
+          $(this).parent().find(".editable:first").focus();
         }
         nodeId = $(this).parent().attr("data-id");
         title = $(this).html();
@@ -232,7 +232,7 @@ define(function() {
       console.log("displaying id:", id, " parentId:", parentId, title);
       if (Mind.NEW_NODE_ADDED) {
         $el.insertAfter(Mind.NEW_NODE_PREV).attr("data-id", id).attr("data-parent-id", parentId);
-        $el.find(".editable").focus();
+        $el.find(".editable:first").focus();
         Mind.NEW_NODE_ADDED = false;
         return Mind.NEW_NODE_PREV = null;
       } else {
@@ -267,11 +267,11 @@ define(function() {
 
 $("#records").on("mouseover", "li", function(e) {
   e.stopPropagation();
-  return $(this).children("a:first").show();
+  return $(this).find("a:first").show();
 });
 
 $("#records").on("mouseout", "li", function(e) {
-  return $(this).children("a:first").hide();
+  return $(this).find("a:first").hide();
 });
 
 $("a#try_it").on("click", function(e) {

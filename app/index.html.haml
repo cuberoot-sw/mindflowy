@@ -39,6 +39,10 @@
                   / UnorderedList
                   %ul
                     %li
+                      %a.twitter-share-button{"data-text" => "Check out undefined by cuberoot", "data-url" => "http://ss14-team-59.divshot.io", "data-via" => "staticshowdown", :href => "https://twitter.com/share"} Tweet
+                      :javascript
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+                    %li
                       %a#account{:href => "#"} Account
                       %a#signout{:href => "#"} Sign out
                     %li#forSignup
@@ -47,31 +51,26 @@
                     %li#forLogin
                       %a{"data-target" => "#myLogin", "data-toggle" => "modal"}
                         Login
-                    %li
-                      %a.twitter-share-button{"data-text" => "Check out undefined by cuberoot", "data-url" => "http://ss14-team-59.divshot.io", "data-via" => "staticshowdown", :href => "https://twitter.com/share"} Tweet
-                      :javascript
-                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
     .home-index-div
       .row
         .mindflowy-desc.transparent-bg
-          %ul
-            %li
-              .logo
-                %h1
-                  %i.fa.fa-sitemap
-                  MindFlowy
-              %h2 Your Digital Brain
-            %li
-              Take control by visualizing all your open loops, tasks, and ideas in your Brain.
-            %li
-              Mind FLowy is a simple Tool to make nested lists, take notes
-              that allows text to be organized into discrete sections.
-            %li
-            %li
-              %a#try_it.btn.btn-danger.btn-lg Give it a Try
-              %span.quiet
-                No Signup required
+          %p
+            .logo
+              %h1
+                %i.fa.fa-sitemap
+                MindFlowy
+            .lead.blue Your Digital Brain
+          %p.lead
+            Take control by visualizing all your open loops, tasks, and ideas in your Brain.
+          %p.lead
+            MindFLowy is a simple Tool to make nested lists, take notes
+            that allows text to be organized into discrete sections.
+          %p
+          %p
+            %a#try_it.btn.btn-danger.btn-lg Give it a Try
+            %span.quiet
+              No Signup required
 
     .container
       .row
@@ -81,8 +80,9 @@
           %ul#records
             %li.item#recordTemplate
               %span.editable(contenteditable="true")
-              %a.delete{:href => "#"}
-                %i.fa.fa-times
+              .del
+                %a.delete{:href => "#"}
+                  %i.fa.fa-times
               %ul
 
         #sidebar.col-md-3.col-sm-3
@@ -178,6 +178,12 @@
                       %button#signup.btn.btn-block.btn-success(name ="signup") Sign up
                     .col-md-5
 
+    %footer.text-center
+      .container
+        .footer-content
+          %p
+            Brought to you by -
+            %a{:href => "http://www.cuberoot.in"} Cube Root
 
     / Google Analytics: change UA-XXXXX-X to be your site's ID.
     :javascript

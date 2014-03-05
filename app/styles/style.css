@@ -1966,21 +1966,4 @@ footer .footer-content p{
 	
 }
 
-.mind-flowy-div{
-  display: none;
-}
-.transparent-bg {
-    background-color: #FFFFFF;
-}
-.mindflowy-desc{
-    padding: 20px;
-    margin-left: 145px;
-    margin-top: 51px;
-    position: relative;
-    width: 80%;
-    height: 80%;
-}
-.mindflowy-desc ul{
-   line-height: 3;
-   list-style: none outside none;
-}
+

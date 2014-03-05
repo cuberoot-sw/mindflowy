@@ -75,7 +75,7 @@ define ->
             title: title
             parent: newParentId
           $prev.children("ul").append($(this).parent())
-          $(this).parent().find(".editable").focus()
+          $(this).parent().find(".editable:first").focus()
 
       jQuery("body").on 'keydown.Shift_tab', '.editable', (e) ->
         console.log 'keydown.Shift_tab', e.which
@@ -87,11 +87,11 @@ define ->
         if $parents.length == 2
           newParentId = null
           $("#records").append($(this).parent())
-          $(this).parent().find(".editable").focus()
+          $(this).parent().find(".editable:first").focus()
         else
           newParentId = $($parents[2]).attr("data-id")
           $newParent = $($parents[2]).children("ul").append($(this).parent())
-          $(this).parent().find(".editable").focus()
+          $(this).parent().find(".editable:first").focus()
 
         nodeId = $(this).parent().attr("data-id")
         title = $(this).html()
@@ -210,7 +210,7 @@ define ->
       # add a data-parent attribute, which we use to locate parent elements
       if Mind.NEW_NODE_ADDED
         $el.insertAfter(Mind.NEW_NODE_PREV).attr("data-id", id).attr("data-parent-id", parentId)
-        $el.find(".editable").focus()
+        $el.find(".editable:first").focus()
         Mind.NEW_NODE_ADDED = false
         Mind.NEW_NODE_PREV = null
       else
@@ -231,17 +231,15 @@ define ->
       # enter the <span> tag and use .text() to escape title
       # navigate back to the cloned element and return it
       $el = $("#recordTemplate").clone().attr("id", null).find(".editable").text(title).end()
-      #$el.find("span.editable").wysiwygEvt()
-      #$el.prepend("<span class='nodeId'>#"+id+"</span>")
       $el.prepend("<div class='origText'>#{title}</div>")
 
     Mind
 
 $("#records").on "mouseover", "li", (e) ->
   e.stopPropagation()
-  $(this).children("a:first").show()
+  $(this).find("a:first").show()
 $("#records").on "mouseout", "li", (e) ->
-  $(this).children("a:first").hide()
+  $(this).find("a:first").hide()
 $("a#try_it").on "click", (e) ->
   e.preventDefault()
   $(".home-index-div").hide()
