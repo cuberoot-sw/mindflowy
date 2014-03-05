@@ -7,6 +7,8 @@ http://www.staticshowdown.com/app/teams/a493fbbd59bf4d36f9cb93c37ec00675/entry
 * jQuery
 * Bootstrap
 * Grunt
+* Bower
+* Yeoman
 
 # Steps to deploy
 ```
