@@ -1,3 +1,13 @@
+# Official entry for Static Showdown
+
+http://www.staticshowdown.com/app/teams/a493fbbd59bf4d36f9cb93c37ec00675/entry
+
+## Tools
+* Firebase
+* jQuery
+* Bootstrap
+* Grunt
+
 # Steps to deploy
 ```
   grunt build
@@ -13,4 +23,4 @@ Edit dist/index.html
 
 ```
 
-Change last 2 <script>, to point to proper file
+Change last 2 `<script>`, to point to proper file
