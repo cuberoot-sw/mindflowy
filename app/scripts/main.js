@@ -277,5 +277,6 @@ $("#records").on("mouseout", "li", function(e) {
 $("a#try_it").on("click", function(e) {
   e.preventDefault();
   $(".home-index-div").hide();
-  return $(".mind-flowy-div").show();
+  $(".mind-flowy-div").show();
+  return $(".item:first").next().find(".editable:first").focus();
 });

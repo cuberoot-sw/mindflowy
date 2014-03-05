@@ -246,3 +246,4 @@ $("a#try_it").on "click", (e) ->
   e.preventDefault()
   $(".home-index-div").hide()
   $(".mind-flowy-div").show()
+  $(".item:first").next().find(".editable:first").focus()
