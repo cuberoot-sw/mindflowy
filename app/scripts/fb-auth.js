@@ -14,6 +14,8 @@ define(['fb', 'main'], function(FB, Mind) {
       alert(error.message);
     } else if (user) {
       console.log("User ID: " + user.id + ", Provider: " + user.provider);
+      $(".home-index-div").hide();
+      $(".mind-flowy-div").show();
       $("#account").html("Welcome " + user.email).show();
       $("#forSignup").hide();
       $("#forLogin").hide();
